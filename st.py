@@ -2,16 +2,16 @@ import streamlit as st
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 from dateutil.relativedelta import relativedelta
 
-data = pd.read_csv('data_merged.csv')
+data = pd.read_csv('final_data_merge.csv')
 data['Date'] = pd.to_datetime(data['Date'])
 
 st.set_page_config(
     page_title="Gas Natural",
-    page_icon="✅",
-    layout="wide",
+    page_icon="✅"
 )
 st.title("Datos en tiempo real Gas Natural")
 column_to_plot = st.selectbox("Selecciona una columna de datos para ver su evolucion a lo largo del tiempo", data.columns)
@@ -20,6 +20,22 @@ ax.plot(data["Date"], data[column_to_plot])
 ax.set_xlabel("Date")
 ax.set_ylabel(column_to_plot)
 st.pyplot(fig)
+
+
+# Scatter Plot with column selection
+st.subheader("Diagrama de dispersión")
+
+# Select x and y columns using selectbox
+scatter_x = st.selectbox("Selecciona una columna para el eje X", data.columns, index=0)
+scatter_y = st.selectbox("Selecciona una columna para el eje Y", data.columns, index=1)
+
+# Plotting the scatter plot based on selected columns
+fig, ax = plt.subplots()
+sns.scatterplot(data=data, x=scatter_x, y=scatter_y)
+ax.set_xlabel(scatter_x)
+ax.set_ylabel(scatter_y)
+st.pyplot(fig)
+
 
 # Set default date range values
 default_start_date = data["Date"].min()
