@@ -1,13 +1,11 @@
 import streamlit as st
-datas = pd.read_csv('data_merge.csv')
-%%writefile app.py
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
 from dateutil.relativedelta import relativedelta
 
-data = pd.read_csv('data.csv')
+data = pd.read_csv('data_merged.csv')
 data['Date'] = pd.to_datetime(data['Date'])
 
 st.set_page_config(
