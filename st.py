@@ -6,7 +6,7 @@ import seaborn as sns
 
 from dateutil.relativedelta import relativedelta
 
-data = pd.read_csv('final_data_merge.csv')
+data = pd.read_csv('data_merged.csv')
 data['Date'] = pd.to_datetime(data['Date'])
 
 st.set_page_config(
@@ -37,19 +37,18 @@ ax.set_ylabel(scatter_y)
 st.pyplot(fig)
 
 
-# Set default date range values
-default_start_date = data["Date"].min()
-default_end_date = data["Date"].max()
+pred = pd.read_csv('predictions.csv')
+pred['Date'] = pd.to_datetime(pred['Date'])
 
-# Create a date range selection widget
-date_range = st.date_input("Selecciona un rango de fechas", value=(default_start_date.date(), default_end_date.date()))
 
-# Convert date_range values to pandas Timestamps
-start_date = pd.Timestamp(date_range[0])
-end_date = pd.Timestamp(date_range[1])
 
-# Filter your dataframe by the selected date range
-data = data[(data["Date"] >= start_date) & (data["Date"] <= end_date)]
+# Select a column for visualization
 
-st.table(data)
+selected_pred = st.selectbox("Selecciona un modelo para ver su prediccion", pred.columns)
+fig, ax = plt.subplots(figsize=(10, 6))  # Wider plot
+
+ax.plot(pred["Date"], pred[selected_pred])
+ax.set_xlabel("Date")
+ax.set_ylabel(selected_pred)
+st.pyplot(fig)
 
