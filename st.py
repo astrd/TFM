@@ -6,7 +6,7 @@ import seaborn as sns
 
 from dateutil.relativedelta import relativedelta
 
-data = pd.read_csv('final_data_merged.csv')
+data = pd.read_csv('final_data_merge.csv')
 data['Date'] = pd.to_datetime(data['Date'])
 
 st.set_page_config(
