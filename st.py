@@ -52,3 +52,12 @@ ax.set_xlabel("Date")
 ax.set_ylabel(selected_pred)
 st.pyplot(fig)
 
+fig, ax = plt.subplots(figsize=(14, 6))  # Wider plot
+fig = px.line(pred, x='Date', y=pred.columns[1:])
+fig.update_xaxes(title='Fecha')
+fig.update_yaxes(title='Precios')
+fig.update_layout(title='Predicciones de Gas Natural de Todos los Modelos', xaxis_rangeslider_visible=True)
+fig.update_yaxes(title='Precios', range=[0, 7])  
+
+st.plotly_chart(fig)
+
