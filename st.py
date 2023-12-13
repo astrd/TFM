@@ -32,7 +32,7 @@ scatter_y = st.selectbox("Selecciona una columna para el eje Y", data.columns, i
 
 # Plotting the scatter plot based on selected columns
 fig, ax = plt.subplots()
-sns.scatterplot(data=data, x=scatter_x, y=scatter_y, s=5))
+sns.scatterplot(data=data, x=scatter_x, y=scatter_y, s=5)
 ax.set_xlabel(scatter_x)
 ax.set_ylabel(scatter_y)
 st.pyplot(fig)
