@@ -44,14 +44,14 @@ pred['Date'] = pd.to_datetime(pred['Date'])
 
 
 # Select a column for visualization
-
 selected_pred = st.selectbox("Selecciona un modelo para ver su prediccion", pred.columns)
-fig, ax = plt.subplots(figsize=(10, 6))  # Wider plot
+figi, ax = plt.subplots(figsize=(10, 6))  # Wider plot
+ax.set_ylim(0, 7)  # Establecer el rango del eje y de 0 a 7
 
 ax.plot(pred["Date"], pred[selected_pred])
 ax.set_xlabel("Date")
 ax.set_ylabel(selected_pred)
-st.pyplot(fig)
+st.pyplot(figi)
 
 fig, ax = plt.subplots(figsize=(14, 6))  # Wider plot
 fig = px.line(pred, x='Date', y=pred.columns[1:])
